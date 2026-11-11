@@ -95,6 +95,34 @@ class TestApp(unittest.TestCase):
         self.assertEqual(self.app.engine.typed_words[0], "ab")
         self.assertFalse(self.app.engine.timer.is_stopped)
 
+    def test_run_event_loop_lifecycle(self):
+        from unittest.mock import MagicMock, patch
+
+        scr = MagicMock()
+        scr.getmaxyx.return_value = (24, 80)
+        # First return a keypress 'a', then exit via Ctrl+C '\x03'
+        scr.get_wch.side_effect = ["a", "\x03"]
+
+        mock_attrs = {
+            "accent": 0, "text": 0, "muted": 0, "untyped": 0,
+            "active_untyped": 0, "correct": 0, "error": 0,
+            "error_extra": 0, "warning": 0, "completed": 0,
+            "completed_error": 0, "active": 0, "caret": 0,
+        }
+
+        with patch("typr.app.setup_theme_colors", return_value=mock_attrs), \
+             patch("curses.curs_set"):
+            self.app._run(scr)
+
+        # Verify that scr.move was called and coordinates were bounded
+        self.assertTrue(scr.move.called)
+        for call_args in scr.move.call_args_list:
+            y, x = call_args[0]
+            self.assertGreaterEqual(y, 0)
+            self.assertLess(y, 24)
+            self.assertGreaterEqual(x, 0)
+            self.assertLess(x, 80)
+
 
 if __name__ == "__main__":
     unittest.main()

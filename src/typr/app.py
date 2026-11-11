@@ -65,6 +65,8 @@ class TyprApp:
         set_cursor_shape(self.config.cursor_style)
 
         while True:
+            rows, cols = scr.getmaxyx()
+
             # 1. Update session state
             if self.current_screen == "test":
                 self.engine.tick()
@@ -120,11 +122,11 @@ class TyprApp:
                                     new_x = target_x
                                 self.visual_caret = (float(cursor_pos[0]), new_x)
 
-                    draw_y = int(round(self.visual_caret[0]))
-                    draw_x = int(round(self.visual_caret[1]))
+                    draw_y = max(0, min(int(round(self.visual_caret[0])), rows - 1))
+                    draw_x = max(0, min(int(round(self.visual_caret[1])), cols - 1))
                     try:
                         curses.curs_set(1)
-                        scr.move(draw_y, min(draw_x, cols - 1))
+                        scr.move(draw_y, draw_x)
                     except curses.error:
                         pass
                 else:

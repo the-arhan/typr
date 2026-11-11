@@ -125,7 +125,7 @@ def setup_theme_colors(theme_name: str) -> Dict[str, int]:
     except curses.error:
         bg = curses.COLOR_BLACK
 
-    has_256 = curses.COLORS >= 256
+    has_256 = getattr(curses, "COLORS", 8) >= 256
     is_mono = theme_name == "mono"
 
     if has_256 and not is_mono:
