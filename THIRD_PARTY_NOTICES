@@ -1,0 +1,19 @@
+# THIRD PARTY NOTICES
+
+Typr is an independent, clean-room open-source project.
+
+## Acknowledgments & Concept Origins
+
+1. **Monkeytype Concept:**
+   - Typr was originally inspired by the minimalist, keyboard-driven typing experience popularized by Monkeytype (created by MiKi and contributors, licensed under GNU GPL v3.0).
+   - In accordance with our clean-room architectural audit (`docs/PROJECT_AUDIT.md`), all configuration schemas, theme palettes, dataset wordlists, statistical formulas, and curses rendering routines in Typr v0.1.0 have been independently designed and implemented from first principles.
+   - Typr does not include or reproduce Monkeytype's branding, copyrighted assets, proprietary datasets, or source code.
+
+2. **Standard Conventions:**
+   - Typing speed (WPM) calculations adhere to the standard international typing convention (1 standard word = 5 keystrokes).
+   - Typing consistency is calculated using the standard statistical Coefficient of Variation (CV = standard_deviation / mean).
+
+3. **Quotes & Snippets:**
+   - Quotations included in Quote Mode are attributed historical and technical quotations sourced from public domain literature and technical publications.
+   - Code snippets in Programming Mode represent original educational programming examples and standard algorithms (e.g., binary search, quicksort, debounce).
+

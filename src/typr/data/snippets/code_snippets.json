@@ -1,0 +1,43 @@
+{
+  "python": [
+    "def binary_search(arr: list[int], target: int) -> int:\n    left, right = 0, len(arr) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1",
+    "class LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache: dict[str, int] = {}\n\n    def get(self, key: str) -> int:\n        if key not in self.cache:\n            return -1\n        val = self.cache.pop(key)\n        self.cache[key] = val\n        return val",
+    "import asyncio\n\nasync def fetch_metrics(service_id: str) -> dict[str, float]:\n    await asyncio.sleep(0.05)\n    return {\"service\": service_id, \"latency_ms\": 12.4, \"error_rate\": 0.001}"
+  ],
+  "rust": [
+    "pub fn quicksort<T: Ord>(slice: &mut [T]) {\n    if slice.len() <= 1 {\n        return;\n    }\n    let pivot = partition(slice);\n    let (left, right) = slice.split_at_mut(pivot);\n    quicksort(left);\n    quicksort(&mut right[1..]);\n}",
+    "impl<T> Option<T> {\n    pub fn unwrap_or(self, default: T) -> T {\n        match self {\n            Some(val) => val,\n            None => default,\n        }\n    }\n}",
+    "fn process_stream(buffer: &[u8]) -> Result<usize, io::Error> {\n    let header = u32::from_be_bytes(buffer[0..4].try_into().unwrap());\n    Ok(header as usize)\n}"
+  ],
+  "cpp": [
+    "template <typename T>\nclass Vector {\nprivate:\n    T* data_;\n    size_t size_;\n    size_t capacity_;\npublic:\n    Vector() : data_(nullptr), size_(0), capacity_(0) {}\n    void push_back(const T& val) {\n        if (size_ == capacity_) reserve(capacity_ == 0 ? 1 : capacity_ * 2);\n        data_[size_++] = val;\n    }\n};",
+    "int main(int argc, char* argv[]) {\n    std::vector<std::string> args(argv, argv + argc);\n    for (const auto& arg : args) {\n        std::cout << \"arg: \" << arg << \"\\n\";\n    }\n    return 0;\n}"
+  ],
+  "javascript": [
+    "async function fetchUserData(userId) {\n    const response = await fetch(`/api/v1/users/${userId}`);\n    if (!response.ok) {\n        throw new Error(`HTTP error! status: ${response.status}`);\n    }\n    const data = await response.json();\n    return data.profile;\n}",
+    "const debounce = (fn, delay = 250) => {\n    let timer;\n    return (...args) => {\n        clearTimeout(timer);\n        timer = setTimeout(() => fn.apply(this, args), delay);\n    };\n};"
+  ],
+  "typescript": [
+    "interface UserSession {\n    readonly id: string;\n    username: string;\n    roles: Array<'admin' | 'editor' | 'viewer'>;\n    createdAt: Date;\n}\n\nfunction hasRole(session: UserSession, role: string): boolean {\n    return session.roles.includes(role as any);\n}",
+    "type Result<T, E = Error> = { ok: true; value: T } | { ok: false; error: E };\n\nexport const safeParse = (input: string): Result<object> => {\n    try {\n        return { ok: true, value: JSON.parse(input) };\n    } catch (err) {\n        return { ok: false, error: err as Error };\n    }\n};"
+  ],
+  "go": [
+    "func worker(id int, jobs <-chan int, results chan<- int) {\n    for j := range jobs {\n        results <- j * 2\n    }\n}\n\nfunc main() {\n    jobs := make(chan int, 100)\n    results := make(chan int, 100)\n    go worker(1, jobs, results)\n}",
+    "type Server struct {\n    addr    string\n    router  *http.ServeMux\n    timeout time.Duration\n}\n\nfunc NewServer(addr string) *Server {\n    return &Server{addr: addr, router: http.NewServeMux(), timeout: 10 * time.Second}\n}"
+  ],
+  "bash": [
+    "#!/usr/bin/env bash\nset -euo pipefail\n\nTARGET_DIR=\"${1:-/tmp/backup}\"\nmkdir -p \"${TARGET_DIR}\"\nfor file in *.log; do\n    [[ -f \"$file\" ]] || continue\n    gzip -c \"$file\" > \"${TARGET_DIR}/${file}.gz\"\ndone\necho \"Backup complete.\"",
+    "find . -type f -name \"*.py\" -exec grep -Hn \"TODO\" {} \\;\ngit status --short | awk '{print $2}'"
+  ],
+  "sql": [
+    "SELECT u.id, u.username, COUNT(o.id) AS total_orders, SUM(o.amount) AS total_spent\nFROM users u\nLEFT JOIN orders o ON u.id = o.user_id\nWHERE u.status = 'active' AND o.created_at >= NOW() - INTERVAL '30 days'\nGROUP BY u.id, u.username\nHAVING SUM(o.amount) > 500\nORDER BY total_spent DESC\nLIMIT 20;",
+    "CREATE TABLE IF NOT EXISTS typing_sessions (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    timestamp REAL NOT NULL,\n    mode TEXT NOT NULL,\n    wpm REAL NOT NULL,\n    raw_wpm REAL NOT NULL,\n    accuracy REAL NOT NULL,\n    duration REAL NOT NULL\n);"
+  ],
+  "html": [
+    "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Typr Terminal</title>\n    <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n    <main class=\"container\">\n        <h1 id=\"title\">Terminal Typing</h1>\n    </main>\n</body>\n</html>"
+  ],
+  "css": [
+    ".container {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    min-height: 100vh;\n    background-color: #18191c;\n    color: #e2e4e9;\n    font-family: 'JetBrains Mono', monospace;\n}"
+  ]
+}
+
